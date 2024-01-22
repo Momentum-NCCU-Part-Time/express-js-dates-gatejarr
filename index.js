@@ -45,7 +45,7 @@ app.get("/api/timestamp", (req, res) => {
   res.status(200).json({"Timestamp": timeStamp})
 })
 
-app.get("/api/*", (req, res) => {
+app.get("/*", (req, res) => {
   const notFound = "not found";
   res.status(404).json({"error": notFound})
 })
