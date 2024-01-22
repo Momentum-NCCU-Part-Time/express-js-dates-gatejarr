@@ -23,6 +23,22 @@ app.get("/api/dates/tomorrow", (req, res) => {
   res.status(200).json({"Tomorrow is": tomorrowsDate})
 })
 
+app.get("/api/day-of-week/:year/:month/:day", (req, res) => {
+  const dayLookup = `${req.params.year}-${req.params.month}-${req.params.day}`;
+  const dayOfWeek = dayjs(dayLookup).format("dddd");
+  res.status(200).json({"Day of the week ": dayOfWeek})
+})
+
+app.get("/api/current-time", (req, res) => {
+  const currentTime = dayjs().format("HH:mm:ss");
+  res.status(200).json({"The time is": currentTime})
+})
+
+// Need 12-hr time
+app.get("/api/current-time?format=12", (req, res) => {
+  
+})
+
 app.listen(port, () => {
   {
     console.log(`Server is running on port ${port}`);
