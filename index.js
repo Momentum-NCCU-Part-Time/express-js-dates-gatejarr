@@ -9,15 +9,18 @@ app.use(morgan("tiny"));
 
 //routes
 app.get("/api/dates/yesterday", (req, res) => {
-  res.send('Yesterday')
+  const yesterdaysDate = dayjs().subtract(1, 'day').format("ddd MMM D, YYYY");
+  res.status(200).json({"Yesterday's date was": yesterdaysDate})
 })
 
 app.get("/api/dates/today", (req, res) => {
-  res.send('Today')
+  const todaysDate = dayjs().format("ddd MMM D, YYYY");
+  res.status(200).json({'Today is': todaysDate})
 })
 
 app.get("/api/dates/tomorrow", (req, res) => {
-  res.send('Tomorrow')
+  const tomorrowsDate = dayjs().add(1, 'day').format("ddd MMM D, YYYY");
+  res.status(200).json({"Tomorrow is": tomorrowsDate})
 })
 
 app.listen(port, () => {
