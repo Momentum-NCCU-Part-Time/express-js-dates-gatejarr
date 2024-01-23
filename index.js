@@ -31,17 +31,17 @@ app.get("/api/day-of-week/:year/:month/:day", (req, res) => {
 
 app.get("/api/current-time", (req, res) => {
   const currentTime = dayjs().format("HH:mm:ss");
-  res.status(200).json({"The time is": currentTime})
-})
-
-// Need 12-hr time, not currently working
-app.get("/api/current-time?format=12", (req, res) => {
-  const timeFormat = "12";
-  res.send({"Format is": timeFormat})
+  const twelveHourCurrent = dayjs().format("hh:mm:ss A")
+  let format = req.query.format
+  if (format == 12) {
+  res.status(200).json({"The time is": twelveHourCurrent})
+  }else {
+    res.status(200).json({"The time is": currentTime})
+  }
 })
 
 app.get("/api/timestamp", (req, res) => {
-  const timeStamp = dayjs().unix();
+  const timeStamp = dayjs().valueOf();
   res.status(200).json({"Timestamp": timeStamp})
 })
 
